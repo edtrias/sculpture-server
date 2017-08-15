@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const users = require('./routes/users')
+const users = require('./routes/users');
+const expos = require('./routes/expos');
 
 const app = express();
 
@@ -20,12 +21,12 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/api/admin', users)
+app.use('/api/admin', users);
+app.use('/api/adming', expos);
 
 app.get('/', (req, res) => {
   res.send('hola')
 });
-
 
 app.listen(27017, () => {
   console.log('Listening on port 27017')

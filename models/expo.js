@@ -11,12 +11,8 @@ const expoSchema = new Schema({
   startDate: Date,
   endDate: Date,
   picture: String,
-  Other: String
+  other: String
 })
 
 const Expo = mongoose.model('Expo', expoSchema);
 module.exports = Expo;
-
-
-
-
