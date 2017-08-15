@@ -17,4 +17,4 @@ router.get('/admin/user/:id', (req, res) => {
   });
 });
 
-module exports router;
+module.exports = router;
