@@ -8,7 +8,7 @@ const router = express();
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/images/uploads')
+    cb(null, 'public/uploads')
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + '.jpg')
@@ -18,11 +18,15 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.get('/expos', (req, res) => {
-  Expo.find().then(expo => res.json(expo));
+  Expo.find()
+    .then(expo => res.json(expo))
+    .catch(error => res.json(error))
 });
 
 router.get('/expos/:id', (req, res) => {
-  Expo.findById(req.params.id).then(expo => res.json(expo));
+  Expo.findById(req.params.id)
+    .then(expo => res.json(expo))
+    .catch(error => res.json(error))
 });
 
 // Yet to be verified
@@ -89,7 +93,9 @@ router.put('/expos/:id', upload.single('image'), (req, res) => {
 });
 
 router.delete('/expos/:id', (req, res) => {
-  Expo.findOneAndRemove().then(expo => res.json(expo));
+  Expo.findOneAndRemove()
+    .then(() => res.json({message: 'Removed successfully'}))
+    .catch(error => res.json(error))
 });
 
 module.exports = router;
