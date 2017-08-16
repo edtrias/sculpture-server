@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const multer = require('multer');
+const Schema = mongoose.Schema;
 
 const sculptureSchema = new Schema({
   name: String,

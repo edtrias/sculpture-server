@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const users = require('./routes/users');
 const expos = require('./routes/expos');
+const collections = require('./routes/collections');
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.use(function(req, res, next) {
 
 app.use('/api/admin', users);
 app.use('/api/admin', expos);
+app.use('/api/admin', collections);
+
 
 app.get('/', (req, res) => {
   res.send('hola')
