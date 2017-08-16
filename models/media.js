@@ -5,11 +5,8 @@ const mediaSchema = new Schema({
   title: String,
   source: String,
   link: String,
-  picture: String,
-
+  image: String,
 })
 
 const Media = mongoose.model('Media', mediaSchema);
 module.exports = Media;
-
-
