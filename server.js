@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 
 const users = require('./routes/users');
 const expos = require('./routes/expos');
+const families = require('./routes/families');
+const artworks = require('./routes/artworks');
+const medias = require('./routes/medias');
 
 const app = express();
 
@@ -21,11 +24,14 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/api/admin', users);
-app.use('/api/admin', expos);
+app.use('/api', users);
+app.use('/api', expos);
+app.use('/api', families);
+app.use('/api', artworks);
+app.use('/api', medias);
 
 app.get('/', (req, res) => {
-  res.send('hola')
+  res.send('MonteCat')
 });
 
 app.listen(27017, () => {
