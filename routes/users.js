@@ -6,15 +6,15 @@ const User = require('../models/user')
 const router = express();
 
 router.get('/users', (req, res) => {
-  User.find().then(user => {
-    res.json(user);
-  });
+  User.find()
+    .then(user => res.json(user))
+    .catch(error => res.send(error))
 });
 
 router.get('/users/:id', (req, res) => {
-  User.findById(req.params.id).then(user => {
-    res.json(user);
-  }).catch(error => res.send(error))
+  User.findById(req.params.id)
+    .then(user => res.json(user))
+    .catch(error => res.send(error))
 });
 
 router.post('/users', (req, res) => {
@@ -25,7 +25,9 @@ router.post('/users', (req, res) => {
     web: req.body.web,
     address: req.body.address,
     phone: req.body.phone
-  }).then(user => res.json(user));
+  })
+    .then(user => res.json(user))
+    .catch(error => res.send(error))
 });
 
 router.put('/users/:id', (req, res) => {
@@ -36,7 +38,9 @@ router.put('/users/:id', (req, res) => {
     web: req.body.web,
     address: req.body.address,
     phone: req.body.phone
-  }).then(user => res.json(user))
-})
+  })
+    .then(user => res.json(user))
+    .catch(error => res.send(error))
+});
 
 module.exports = router;
