@@ -10,7 +10,7 @@ const expoSchema = new Schema({
   coutry: String,
   startDate: Date,
   endDate: Date,
-  image: String,
+  image: { data: Buffer, contentType: String },
   other: String
 })
 

@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage });
+// var upload = multer({ storage: storage });
 
 router.get('/expos', (req, res) => {
   Expo.find()
@@ -31,7 +31,7 @@ router.get('/expos/:id', (req, res) => {
 
 // Yet to be verified
 
-router.post('/expos', upload.single('image'), (req, res) => {
+router.post('/expos', (req, res) => {
 
   //-------------- Test to see if the req works well (it works) ------------
   // console.log(req.body);
@@ -39,32 +39,7 @@ router.post('/expos', upload.single('image'), (req, res) => {
   // res.status(204).end();
 
   //------------Test via Instance (well written but doesn't work)-------------
-  const expo = new Expo({
-    title: req.body.title,
-    place: req.body.place,
-    link: req.body.link,
-    modality: req.body.modality,
-    city: req.body.city,
-    coutry: req.body.country,
-    startDate: req.body.startDate,
-    endDate: req.body.endDate,
-    image: req.file,
-    other: req.body.other
-   });
-
-   expo.save((err) => {
-     if (err) {
-      res.json(err);
-      return;
-    }
-
-    res.json({
-      message: 'New Expo created!'
-    });
-  });
-
-//------------ Test via Promises (well written but doesn't work)-------------
-  // Expo.create({
+  // const expo = new Expo({
   //   title: req.body.title,
   //   place: req.body.place,
   //   link: req.body.link,
@@ -73,24 +48,59 @@ router.post('/expos', upload.single('image'), (req, res) => {
   //   coutry: req.body.country,
   //   startDate: req.body.startDate,
   //   endDate: req.body.endDate,
+  //   image: req.file,
   //   other: req.body.other
-  // }).then(expo => res.json(expo));
+  //  });
+  //
+  //  expo.save((err) => {
+  //    if (err) {
+  //     res.json(err);
+  //     return;
+  //   }
+  //
+  //   res.json({
+  //     message: 'New Expo created!'
+  //   });
+  // });
+
+//------------ Test via Promises (well written but doesn't work)-------------
+  var upload = multer({storage: storage}).single('image')
+
+  upload(req, res, function(err) {
+    Expo.create({
+      title: req.body.title,
+      place: req.body.place,
+      link: req.body.link,
+      modality: req.body.modality,
+      city: req.body.city,
+      coutry: req.body.country,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      image: req.file,
+      other: req.body.other
+    })
+    .then(expo => res.json(expo))
+    .then(() => res.end('File is uploaded'))
+    .catch(error => res.json(error))
+  })
+
+
 });
 
-router.put('/expos/:id', upload.single('image'), (req, res) => {
-  Expo.findOneAndUpdate({
-    title: req.body.title,
-    place: req.body.place,
-    link: req.body.link,
-    modality: req.body.modality,
-    city: req.body.city,
-    coutry: req.body.country,
-    startDate: req.body.startDate,
-    endDate: req.body.endDate,
-    image: req.file,
-    other: req.body.other
-  }).then(expo => res.json(expo));
-});
+// router.put('/expos/:id', upload.single('image'), (req, res) => {
+//   Expo.findOneAndUpdate({
+//     title: req.body.title,
+//     place: req.body.place,
+//     link: req.body.link,
+//     modality: req.body.modality,
+//     city: req.body.city,
+//     coutry: req.body.country,
+//     startDate: req.body.startDate,
+//     endDate: req.body.endDate,
+//     image: req.file,
+//     other: req.body.other
+//   }).then(expo => res.json(expo));
+// });
 
 router.delete('/expos/:id', (req, res) => {
   Expo.findOneAndRemove()
