@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/api/admin', users);
-app.use('/api/adming', expos);
+app.use('/api/admin', expos);
 
 app.get('/', (req, res) => {
   res.send('hola')
