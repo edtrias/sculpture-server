@@ -44,10 +44,6 @@ router.post('/expos', (req, res) => {
   var upload = multer({storage: storage}).single('image')
 
   upload(req, res, (err) => {
-
-
-    var title = req.body.title;
-
     Expo.create({
       title: req.body.title,
       place: req.body.place,
@@ -74,20 +70,40 @@ router.post('/expos', (req, res) => {
   })
 });
 
-// router.put('/expos/:id', upload.single('image'), (req, res) => {
-//   Expo.findOneAndUpdate({
-//     title: req.body.title,
-//     place: req.body.place,
-//     link: req.body.link,
-//     modality: req.body.modality,
-//     city: req.body.city,
-//     coutry: req.body.country,
-//     startDate: req.body.startDate,
-//     endDate: req.body.endDate,
-//     image: req.file,
-//     other: req.body.other
-//   }).then(expo => res.json(expo));
-// });
+router.put('/expos/:id', (req, res) => {
+  Expo.findOneAndUpdate({
+    title: req.body.title,
+    place: req.body.place,
+    link: req.body.link,
+    modality: req.body.modality,
+    city: req.body.city,
+    coutry: req.body.country,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    other: req.body.other
+  }).then(expo => res.json(expo));
+});
+
+router.put('/expos/:id/img', (req, res) => {
+
+  var upload = multer({storage: storage}).single('image')
+
+  upload(req, res, (err) => {
+    Expo.findOneAndUpdate({
+      image: req.file,
+      fieldname: req.file.fieldname,
+      originalname: req.file.originalname,
+      encoding: req.file.encoding,
+      mimetype: req.file.mimetype,
+      destination:req.file.destination,
+      filename: req.file.filename,
+      path: req.file.path,
+      size: req.file.size,
+    })
+      .then(expo => res.json(expo))
+      .catch(error => res.json(error))
+  })
+})
 
 router.delete('/expos/:id', (req, res) => {
   Expo.findOneAndRemove()
