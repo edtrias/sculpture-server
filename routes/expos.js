@@ -11,7 +11,7 @@ const router = express();
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/uploads')
+    cb(null, 'public/uploads/expos')
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -41,7 +41,7 @@ router.post('/expos', (req, res) => {
   // console.log(req.file);
   // res.status(204).end();
 
-  var upload = multer({storage: storage}).single('image')
+  let upload = multer({storage: storage}).single('image')
 
   upload(req, res, (err) => {
     Expo.create({
@@ -81,7 +81,9 @@ router.put('/expos/:id', (req, res) => {
     startDate: req.body.startDate,
     endDate: req.body.endDate,
     other: req.body.other
-  }).then(expo => res.json(expo));
+  })
+    .then(expo => res.json(expo))
+    .catch(error => res.json(error));
 });
 
 router.put('/expos/:id/img', (req, res) => {
