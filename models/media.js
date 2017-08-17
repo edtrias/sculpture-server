@@ -5,7 +5,18 @@ const mediaSchema = new Schema({
   title: String,
   source: String,
   link: String,
-  image: String,
+  image: {
+    fieldname: String,
+    originalname: String,
+    encoding: String,
+    mimeptype: String,
+    destination: String,
+    filename: String,
+    path: String,
+    size: Number,
+    created_at: Date,
+    updated_at: Date
+  }
 })
 
 const Media = mongoose.model('Media', mediaSchema);
