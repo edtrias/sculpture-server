@@ -80,8 +80,8 @@ router.put('/expos/:id', (req, res) => {
     })
       .then(() => res.json({message: 'Expo data has been upadated'}))
       .catch(error => res.json(error))
-  })
-});
+  });
+
 
 router.put('/expos/:id/img', (req, res) => {
 
