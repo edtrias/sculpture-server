@@ -10,6 +10,7 @@ const expoSchema = new Schema({
   coutry: String,
   startDate: Date,
   endDate: Date,
+  other: String,
   image: {
     fieldname: String,
     originalname: String,
@@ -21,8 +22,7 @@ const expoSchema = new Schema({
     size: Number,
     created_at: Date,
     updated_at: Date
-  },
-  other: String
+  }
 })
 
 const Expo = mongoose.model('Expo', expoSchema);
