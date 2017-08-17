@@ -1,17 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const multer = require('multer');
 
 const Expo = require('../models/expo');
 
 const router = express();
 
+
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
   }
 })
 
@@ -38,35 +41,13 @@ router.post('/expos', (req, res) => {
   // console.log(req.file);
   // res.status(204).end();
 
-  //------------Test via Instance (well written but doesn't work)-------------
-  // const expo = new Expo({
-  //   title: req.body.title,
-  //   place: req.body.place,
-  //   link: req.body.link,
-  //   modality: req.body.modality,
-  //   city: req.body.city,
-  //   coutry: req.body.country,
-  //   startDate: req.body.startDate,
-  //   endDate: req.body.endDate,
-  //   image: req.file,
-  //   other: req.body.other
-  //  });
-  //
-  //  expo.save((err) => {
-  //    if (err) {
-  //     res.json(err);
-  //     return;
-  //   }
-  //
-  //   res.json({
-  //     message: 'New Expo created!'
-  //   });
-  // });
-
-//------------ Test via Promises (well written but doesn't work)-------------
   var upload = multer({storage: storage}).single('image')
 
-  upload(req, res, function(err) {
+  upload(req, res, (err) => {
+
+
+    var title = req.body.title;
+
     Expo.create({
       title: req.body.title,
       place: req.body.place,
@@ -76,15 +57,21 @@ router.post('/expos', (req, res) => {
       coutry: req.body.country,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
+      other: req.body.other,
       image: req.file,
-      other: req.body.other
+      fieldname: req.file.fieldname,
+      originalname: req.file.originalname,
+      encoding: req.file.encoding,
+      mimetype: req.file.mimetype,
+      destination:req.file.destination,
+      filename: req.file.filename,
+      path: req.file.path,
+      size: req.file.size,
     })
-    .then(expo => res.json(expo))
-    .then(() => res.end('File is uploaded'))
-    .catch(error => res.json(error))
+      .then(expo => res.json(expo))
+      // .then(() => res.end('File is uploaded'))
+      .catch(error => res.json(error))
   })
-
-
 });
 
 // router.put('/expos/:id', upload.single('image'), (req, res) => {
