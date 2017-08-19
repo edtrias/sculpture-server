@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const artworkSchema = new Schema({
   name: String,
-  family: String,
+  family: { type: Schema.Types.ObjectId, ref: 'Family' },
   material: String,
   specs: String,
   image: {
