@@ -17,6 +17,7 @@ router.get('/users/:id', (req, res) => {
     .catch(error => res.send(error))
 });
 
+//For possible future uses, since there just an Admin user, there is no use for it at the moment.
 router.post('/users', (req, res) => {
   User.create({
     name: req.body.name,
@@ -24,7 +25,9 @@ router.post('/users', (req, res) => {
     email: req.body.email,
     web: req.body.web,
     address: req.body.address,
-    phone: req.body.phone
+    phone: req.body.phone,
+    username: req.body.username,
+    password: req.body.password
   })
     .then(user => res.json(user))
     .catch(error => res.send(error))
@@ -37,7 +40,9 @@ router.put('/users/:id', (req, res) => {
     email: req.body.email,
     web: req.body.web,
     address: req.body.address,
-    phone: req.body.phone
+    phone: req.body.phone,
+    username: req.body.username,
+    password: req.body.password
   })
     .then(user => res.json(user))
     .catch(error => res.send(error))
