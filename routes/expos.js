@@ -82,7 +82,6 @@ router.put('/expos/:id', (req, res) => {
       .catch(error => res.json(error))
   });
 
-
 router.put('/expos/:id/img', (req, res) => {
 
   var upload = multer({storage: storage}).single('image')
@@ -102,7 +101,7 @@ router.put('/expos/:id/img', (req, res) => {
       .then(() => res.json({message: 'Expo image has been upadated'}))
       .catch(error => res.json(error))
   })
-})
+});
 
 router.delete('/expos/:id', (req, res) => {
   Expo.findOneAndRemove()
