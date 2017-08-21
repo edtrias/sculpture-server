@@ -25,6 +25,9 @@ router.post('/users', (req, res) => {
     email: req.body.email,
     web: req.body.web,
     address: req.body.address,
+    postalCode: req.body.postalCode,
+    province: req.body.province,
+    city: req.body.city,
     phone: req.body.phone,
     username: req.body.username,
     password: req.body.password
@@ -40,6 +43,9 @@ router.put('/users/:id', (req, res) => {
     email: req.body.email,
     web: req.body.web,
     address: req.body.address,
+    postalCode: req.body.postalCode,
+    province: req.body.province,
+    city: req.body.city,
     phone: req.body.phone,
     username: req.body.username,
     password: req.body.password
