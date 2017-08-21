@@ -43,7 +43,7 @@ router.post('/expos', (req, res) => {
     Expo.create({
       title: req.body.title,
       place: req.body.place,
-      link: req.body.link,
+      hyperlink: req.body.hyperlink,
       modality: req.body.modality,
       city: req.body.city,
       coutry: req.body.country,
@@ -58,7 +58,7 @@ router.post('/expos', (req, res) => {
       destination:req.file.destination,
       filename: req.file.filename,
       path: req.file.path,
-      size: req.file.size,
+      size: req.file.size
     })
       .then(expo => res.json({response: expo, message: 'Expo has been created'}))
       // .then(() => res.end('File is uploaded'))
@@ -70,7 +70,7 @@ router.put('/expos/:id', (req, res) => {
   Expo.findOneAndUpdate({
     title: req.body.title,
     place: req.body.place,
-    link: req.body.link,
+    hyperlink: req.body.hyperlink,
     modality: req.body.modality,
     city: req.body.city,
     coutry: req.body.country,
@@ -96,7 +96,7 @@ router.put('/expos/:id/img', (req, res) => {
       destination:req.file.destination,
       filename: req.file.filename,
       path: req.file.path,
-      size: req.file.size,
+      size: req.file.size
     })
       .then(() => res.json({message: 'Expo image has been upadated'}))
       .catch(error => res.json(error))

@@ -36,7 +36,7 @@ router.post('/medias', (req, res) => {
     Media.create({
       title: req.body.title,
       source: req.body.source,
-      link: req.body.link,
+      hyperlink: req.body.hyperlink,
       image: req.file,
       fieldname: req.file.fieldname,
       originalname: req.file.originalname,
@@ -45,7 +45,7 @@ router.post('/medias', (req, res) => {
       destination:req.file.destination,
       filename: req.file.filename,
       path: req.file.path,
-      size: req.file.size,
+      size: req.file.size
     })
       .then(data => res.json({response: data, message: 'Media has been created'}))
       .catch(error => res.json(error))
@@ -56,7 +56,7 @@ router.put('/medias/:id', (req, res) => {
   Media.findOneAndUpdate({
     title: req.body.title,
     source: req.body.source,
-    link: req.body.link,
+    hyperlink: req.body.hyperlink
   })
     .then(() => res.json({message: 'Media data has been updated'}))
     .catch(error => res.json(error))
@@ -72,7 +72,7 @@ router.put('/medias/:id/img', (req, res) => {
     destination:req.file.destination,
     filename: req.file.filename,
     path: req.file.path,
-    size: req.file.size,
+    size: req.file.size
   })
     .then(() => res.json({message: 'Media image has been upadated'}))
     .catch(error => res.json(error))

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const expoSchema = new Schema({
   title: String,
   place: String,
-  link: String,
+  hyperlink: String,
   modality: String,
   city: String,
   coutry: String,

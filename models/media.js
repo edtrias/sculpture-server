@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const mediaSchema = new Schema({
   title: String,
   source: String,
-  link: String,
+  hyperlink: String,
   image: {
     fieldname: String,
     originalname: String,
