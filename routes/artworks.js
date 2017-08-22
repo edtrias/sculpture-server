@@ -8,7 +8,7 @@ const Artwork = require('../models/artwork');
 const router = express();
 
 var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (req, res, cb) => {
     cb(null, 'public/uploads/artworks')
   },
   filename: (req, file, cb) => {
@@ -31,16 +31,16 @@ router.get('/artworks/:id', (req, res) => {
 router.post('/artworks', (req, res) => {
 
   let upload = multer({storage: storage}).single('image');
-
+  
   upload(req, res,(err) => {
 
     Artwork.create({
       name: req.body.name,
-      // family: req.body.family,
+      family: req.body.family,
       material: req.body.material,
       specs: req.body.specs,
       image: req.file,
-      // fieldname: req.file.fieldname,
+      fieldname: req.file.fieldname,
       originalname: req.file.originalname,
       encoding: req.file.encoding,
       mimetype: req.file.mimetype,

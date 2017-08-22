@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const artworkSchema = new Schema({
   name: String,
-  // family: { type: Schema.Types.ObjectId, ref: 'Family' },
+  family: { type: Schema.Types.ObjectId, ref: 'Family' },
   material: String,
   specs: String,
   image: {
-    // fieldname: String,
+    fieldname: String,
     originalname: String,
     encoding: String,
     mimeptype: String,
