@@ -49,6 +49,7 @@ router.post('/artworks', (req, res) => {
       path: req.file.path,
       size: req.file.size,
     })
+      .then(data => console.log(res.data))
       .then(data => res.json({response: data , message: 'Artwork has been created.'}))
       .catch(error => res.json(error))
   })
