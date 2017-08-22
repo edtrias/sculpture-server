@@ -36,11 +36,11 @@ router.post('/artworks', (req, res) => {
 
     Artwork.create({
       name: req.body.name,
-      family: req.body.family,
+      // family: req.body.family,
       material: req.body.material,
       specs: req.body.specs,
       image: req.file,
-      fieldname: req.file.fieldname,
+      // fieldname: req.file.fieldname,
       originalname: req.file.originalname,
       encoding: req.file.encoding,
       mimetype: req.file.mimetype,
@@ -49,7 +49,6 @@ router.post('/artworks', (req, res) => {
       path: req.file.path,
       size: req.file.size,
     })
-      .then(data => console.log(res.data))
       .then(data => res.json({response: data , message: 'Artwork has been created.'}))
       .catch(error => res.json(error))
   })
@@ -72,7 +71,7 @@ router.put('/artworks/:id/img'), (req, res) => {
   upload(req,res, (err) => {
     Artwork.findOneAndUpdate({
       image: req.file,
-      fieldname: req.file.fieldname,
+      // fieldname: req.file.fieldname,
       originalname: req.file.originalname,
       encoding: req.file.encoding,
       mimetype: req.file.mimetype,
