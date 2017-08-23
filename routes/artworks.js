@@ -41,13 +41,13 @@ router.post('/artworks', (req, res) => {
       specs: req.body.specs,
       image: req.file,
       // fieldname: req.file.fieldname,
-      originalname: req.file.originalname,
-      encoding: req.file.encoding,
-      mimetype: req.file.mimetype,
-      destination:req.file.destination,
-      filename: req.file.filename,
-      path: req.file.path,
-      size: req.file.size,
+      // originalname: req.file.originalname,
+      // encoding: req.file.encoding,
+      // mimetype: req.file.mimetype,
+      // destination:req.file.destination,
+      // filename: req.file.filename,
+      // path: req.file.path,
+      // size: req.file.size,
     })
       .then(data => res.json({response: data , message: 'Artwork has been created.'}))
       .catch(error => res.json(error))

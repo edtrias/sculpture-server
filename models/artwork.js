@@ -7,7 +7,7 @@ const artworkSchema = new Schema({
   material: String,
   specs: String,
   image: {
-    // fieldname: String,
+    fieldname: String,
     originalname: String,
     encoding: String,
     mimeptype: String,
