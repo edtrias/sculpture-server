@@ -9,7 +9,7 @@ const router = express();
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/uploads/artworks')
+    cb(null, 'uploads/artworks')
   },
   filename: (req, file, cb) => {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -31,7 +31,7 @@ router.get('/artworks/:id', (req, res) => {
 router.post('/artworks', (req, res) => {
 
   let upload = multer({storage: storage}).single('image');
-  
+
   upload(req, res,(err) => {
     Artwork.create({
       name: req.body.name,
@@ -45,8 +45,8 @@ router.post('/artworks', (req, res) => {
       //mimetype: req.file.mimetype,
       //destination:req.file.destination,
       //filename: req.file.filename,
-      //path: req.file.path,
-      //size: req.file.size,
+      // path: req.file.path,
+      // size: req.file.size,
 
 
     })
@@ -72,14 +72,14 @@ router.put('/artworks/:id/img'), (req, res) => {
   upload(req,res, (err) => {
     Artwork.findOneAndUpdate({
       image: req.file,
-      // fieldname: req.file.fieldname,
+      fieldname: req.file.fieldname,
       originalname: req.file.originalname,
-      encoding: req.file.encoding,
-      mimetype: req.file.mimetype,
-      destination:req.file.destination,
-      filename: req.file.filename,
-      path: req.file.path,
-      size: req.file.size,
+      // encoding: req.file.encoding,
+      // mimetype: req.file.mimetype,
+      // destination:req.file.destination,
+      // filename: req.file.filename,
+      // path: req.file.path,
+      // size: req.file.size,
     })
      .then(() => res.json({message: 'Artwork image has been updated.'}))
       .catch(error => res.json(error))

@@ -9,7 +9,7 @@ const router = express();
 
 let storage = multer.diskStorage({
   destination: (req, res, cb) => {
-    cb(null, 'public/uploads/medias')
+    cb(null, 'uploads/medias')
   },
   filename: (req, file, cb) => {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -40,12 +40,12 @@ router.post('/medias', (req, res) => {
       image: req.file,
       fieldname: req.file.fieldname,
       originalname: req.file.originalname,
-      encoding: req.file.encoding,
-      mimetype: req.file.mimetype,
-      destination:req.file.destination,
-      filename: req.file.filename,
-      path: req.file.path,
-      size: req.file.size
+      // encoding: req.file.encoding,
+      // mimetype: req.file.mimetype,
+      // destination:req.file.destination,
+      // filename: req.file.filename,
+      // path: req.file.path,
+      // size: req.file.size
     })
       .then(data => res.json({response: data, message: 'Media has been created'}))
       .catch(error => res.json(error))
@@ -67,12 +67,12 @@ router.put('/medias/:id/img', (req, res) => {
     image: req.file,
     fieldname: req.file.fieldname,
     originalname: req.file.originalname,
-    encoding: req.file.encoding,
-    mimetype: req.file.mimetype,
-    destination:req.file.destination,
-    filename: req.file.filename,
-    path: req.file.path,
-    size: req.file.size
+    // encoding: req.file.encoding,
+    // mimetype: req.file.mimetype,
+    // destination:req.file.destination,
+    // filename: req.file.filename,
+    // path: req.file.path,
+    // size: req.file.size
   })
     .then(() => res.json({message: 'Media image has been upadated'}))
     .catch(error => res.json(error))

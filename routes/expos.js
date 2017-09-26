@@ -9,7 +9,7 @@ const router = express();
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/uploads/expos')
+    cb(null, 'uploads/expos')
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -33,7 +33,7 @@ router.get('/expos/:id', (req, res) => {
 router.post('/expos', (req, res) => {
 
   //-------------- Test to see if the req works well (it works) ------------
-  // console.log(req.body);
+  console.log(req.body);
   // console.log(req.file);
   // res.status(204).end();
 
@@ -53,12 +53,12 @@ router.post('/expos', (req, res) => {
       image: req.file,
       fieldname: req.file.fieldname,
       originalname: req.file.originalname,
-      encoding: req.file.encoding,
-      mimetype: req.file.mimetype,
-      destination:req.file.destination,
-      filename: req.file.filename,
-      path: req.file.path,
-      size: req.file.size
+      // encoding: req.file.encoding,
+      // mimetype: req.file.mimetype,
+      // destination:req.file.destination,
+      // filename: req.file.filename,
+      // path: req.file.path,
+      // size: req.file.size
     })
       .then(expo => res.json({response: expo, message: 'Expo has been created'}))
       // .then(() => res.end('File is uploaded'))
@@ -91,12 +91,12 @@ router.put('/expos/:id/img', (req, res) => {
       image: req.file,
       fieldname: req.file.fieldname,
       originalname: req.file.originalname,
-      encoding: req.file.encoding,
-      mimetype: req.file.mimetype,
-      destination:req.file.destination,
-      filename: req.file.filename,
-      path: req.file.path,
-      size: req.file.size
+      // encoding: req.file.encoding,
+      // mimetype: req.file.mimetype,
+      // destination:req.file.destination,
+      // filename: req.file.filename,
+      // path: req.file.path,
+      // size: req.file.size
     })
       .then(() => res.json({message: 'Expo image has been upadated'}))
       .catch(error => res.json(error))
